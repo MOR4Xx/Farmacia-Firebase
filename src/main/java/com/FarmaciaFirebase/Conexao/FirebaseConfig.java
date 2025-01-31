@@ -13,7 +13,7 @@ public class FirebaseConfig {
     public static void initializeFirebase() {
         if (!isInitialized) {
             try {
-                FileInputStream serviceAccount = new FileInputStream("src/main/java/com/FarmaciaFirebase/Conexao/");
+                FileInputStream serviceAccount = new FileInputStream("C:/Users/jarab/OneDrive/Área de Trabalho/farmacia-63410-firebase-adminsdk-fbsvc-b9d3db4da9.json");
 
                 FirebaseOptions options = new FirebaseOptions.Builder()
                         .setCredentials(GoogleCredentials.fromStream(serviceAccount))

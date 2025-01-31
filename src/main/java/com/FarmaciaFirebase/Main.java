@@ -208,14 +208,25 @@ public class Main {
             opcao = scanner.nextInt();
             scanner.nextLine(); // Limpar buffer
 
-            switch (opcao) {
-//                case 1: adicionarCliente(); break;
-//                case 2: editarCliente(); break;
-//                case 3: listarCliente(); break;
-//                case 4: excluirCliente(); break;
-//                case 0: System.out.println("Voltando..."); break;
-//                default: System.out.println("Opção inválida!");
-            }
+//            switch (opcao) {
+//                case 1:
+//                    adicionarCliente();
+//                    break;
+//                case 2:
+//                    editarCliente();
+//                    break;
+//                case 3:
+//                    listarCliente();
+//                    break;
+//                case 4:
+//                    excluirCliente();
+//                    break;
+//                case 0:
+//                    System.out.println("Voltando...");
+//                    break;
+//                default:
+//                    System.out.println("Opção inválida!");
+//            }
         } while (opcao != 0);
     }
 
@@ -234,14 +245,81 @@ public class Main {
             scanner.nextLine(); // Limpar buffer
 
             switch (opcao) {
-//                case 1: adicionarFuncionario(); break;
-//                case 2: editarFuncionario(); break;
-//                case 3: listarFuncionario(); break;
-//                case 4: excluirFuncionario(); break;
-//                case 0: System.out.println("Voltando..."); break;
-//                default: System.out.println("Opção inválida!");
+                case 1: adicionarFuncionario(); break;
+                case 2: editarFuncionario(); break;
+                case 3: listarFuncionario(); break;
+                case 4: excluirFuncionario(); break;
+                case 0: System.out.println("Voltando..."); break;
+                default: System.out.println("Opção inválida!");
             }
         } while (opcao != 0);
     }
 
+    private static void adicionarFuncionario() {
+
+        System.out.println("\n========");
+
+        try {
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
+
+            System.out.print("CPF: ");
+            String cpf = scanner.nextLine();
+
+            System.out.print("Idade: ");
+            int idade = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.print("Telefone: ");
+            String telefone = scanner.nextLine();
+
+            System.out.print("Cargo: ");
+            String cargo = scanner.nextLine();
+
+            System.out.print("Salario: R$");
+            Double salario = scanner.nextDouble();
+
+            Funcionario funcionario = new Funcionario(nome, cpf, idade, telefone, cargo, salario);
+            funcionarioDAO.adicionarFuncionario(funcionario);
+
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void editarFuncionario() {
+    }
+
+    private static void listarFuncionario() {
+        try {
+            List<Funcionario> listFuncionario = funcionarioDAO.listarFuncionario();
+
+            if (listFuncionario.isEmpty()) {
+                System.out.println("Nenhum funcionario encontrado.");
+                return;
+            }
+
+            for (Funcionario funcionario : listFuncionario) {
+                System.out.println("\n========");
+                System.out.println("Nome: " + funcionario.getNome());
+                System.out.println("CPF: " + funcionario.getCpf());
+                System.out.println("Idade: " + funcionario.getIdade());
+                System.out.println("Telefone: " + funcionario.getTelefone());
+                System.out.println("Cargo: " + funcionario.getCargo());
+                System.out.println("Salario: R$" + funcionario.getSalario());
+                System.out.println("========");
+
+            }
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void excluirFuncionario(){
+
+    }
 }

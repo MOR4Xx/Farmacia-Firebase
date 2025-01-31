@@ -9,6 +9,6 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class ClienteDAO {
-    private static final String COLLECTION_NAME = "remedios";
+    private static final String COLLECTION_NAME = "clientes";
 
 }

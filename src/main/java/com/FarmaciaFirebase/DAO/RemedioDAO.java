@@ -112,7 +112,7 @@ public class RemedioDAO {
     //listar remedio
     public List<Remedio> listarRemedios() throws ExecutionException, InterruptedException {
         Firestore db = FirestoreClient.getFirestore();
-        CollectionReference remediosRef = db.collection("remedios");
+        CollectionReference remediosRef = db.collection(COLLECTION_NAME);
         ApiFuture<QuerySnapshot> future = remediosRef.get();
 
         List<Remedio> listaRemedios = new ArrayList<>();
