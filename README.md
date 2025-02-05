@@ -74,7 +74,7 @@ Farmacia-Firebase
 │   │           │   ├── Funcionario.java
 │   │           │   ├── Pessoa.java
 │   │           │   └── Remedio.java
-│   │           ├── Conexao.java
+│   │           ├── Conexao
 │   │           │   └── FirebaseConfig.java
 │   │           └── Main.java
 ├── pom.xml
