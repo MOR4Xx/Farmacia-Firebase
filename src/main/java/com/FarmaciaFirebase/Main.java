@@ -194,7 +194,7 @@ public class Main {
         remedioDAO.excluirRemedio(nome);
     }
 
-    // ================== MENU CLIENTE ==================
+     // ================== MENU CLIENTE ==================
     public static void menuClientes() {
         int opcao;
         do {
@@ -208,27 +208,108 @@ public class Main {
             opcao = scanner.nextInt();
             scanner.nextLine(); // Limpar buffer
 
-//            switch (opcao) {
-//                case 1:
-//                    adicionarCliente();
-//                    break;
-//                case 2:
-//                    editarCliente();
-//                    break;
-//                case 3:
-//                    listarCliente();
-//                    break;
-//                case 4:
-//                    excluirCliente();
-//                    break;
-//                case 0:
-//                    System.out.println("Voltando...");
-//                    break;
-//                default:
-//                    System.out.println("Opção inválida!");
-//            }
+            switch (opcao) {
+                case 1: adicionarCliente(); break;
+                case 2: editarCliente(); break;
+                case 3: listarCliente(); break;
+                case 4: excluirCliente(); break;
+                case 0: System.out.println("Voltando..."); break;
+                default: System.out.println("Opção inválida!");
+            }
         } while (opcao != 0);
     }
+
+    private static void editarCliente() {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Scanner scanner = new Scanner(System.in);
+    
+        System.out.print("Qual o CPF do cliente que deseja alterar? ");
+        String cpf = scanner.nextLine();
+    
+        try {
+            clienteDAO.editarCliente(cpf);
+        } catch (ExecutionException | InterruptedException e) {
+            System.out.println("Erro ao editar cliente: " + e.getMessage());
+            e.printStackTrace(); // Opcional: Mostra detalhes do erro
+        }
+    }
+    
+
+    private static void adicionarCliente() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n========");
+    
+        try {
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
+    
+            System.out.print("CPF: ");
+            String cpf = scanner.nextLine();
+    
+            System.out.print("Idade: ");
+            int idade = scanner.nextInt();
+            scanner.nextLine(); // Consumir quebra de linha
+    
+            System.out.print("Telefone: ");
+            String telefone = scanner.nextLine();
+    
+            System.out.print("Possui plano de saúde? (S/N): ");
+            String respostaPlano = scanner.nextLine().trim().toUpperCase();
+            boolean possuiPlano = respostaPlano.equals("S");
+    
+            
+            Cliente cliente = new Cliente(nome, cpf, idade, telefone, possuiPlano);
+            clienteDAO.adicionarcliente(cliente);
+    
+            System.out.println("Cliente adicionado com sucesso!");
+    
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void listarCliente() {
+
+        try {
+            List<Cliente> listClientes = clienteDAO.listarClientes();
+    
+            if (listClientes.isEmpty()) {
+                System.out.println("Nenhum cliente encontrado.");
+                return;
+            }
+    
+            for (Cliente cliente : listClientes) {
+                System.out.println("\n========");
+                System.out.println("Nome: " + cliente.getNome());
+                System.out.println("CPF: " + cliente.getCpf());
+                System.out.println("Idade: " + cliente.getIdade());
+                System.out.println("Telefone: " + cliente.getTelefone());
+                System.out.println("Plano de Saúde: " + (cliente.isPlanoSaude() ? "Sim" : "Não"));
+                System.out.println("========");
+            }
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void excluirCliente() {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Scanner scanner = new Scanner(System.in);
+    
+        System.out.print("Digite o CPF do cliente que deseja excluir: ");
+        String cpf = scanner.nextLine();
+    
+        try {
+            clienteDAO.excluirCliente(cpf);
+        } catch (ExecutionException | InterruptedException e) {
+            System.out.println("Erro ao excluir cliente: " + e.getMessage());
+        }
+    }
+    
 
     // ================== MENU FUNCIONARIO ==================
     public static void menuFuncionarios() {
