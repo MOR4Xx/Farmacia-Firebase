@@ -126,9 +126,9 @@ Caso tenha dúvidas, sugestões ou queira contribuir para o projeto, entre em co
 Jorge Afonso
 - **GitHub**: [@MOR4Xx](https://github.com/MOR4Xx)
 - **E-mail**: `jarabelo68@gmail.com`
-- **LinkedIn**: [Jorge Afonso]([https://www.linkedin.com/in/seu-perfil/](https://www.linkedin.com/in/jorge-afonso-rabelo-de-araujo-598088239/))
+- **LinkedIn**: [Jorge Afonso](https://www.linkedin.com/in/jorge-afonso-rabelo-de-araujo-598088239/)
       
 Leandro Rosa
 - **GitHub**: [@LDRRosa](https://github.com/LDRRosa)
 - **E-mail**: `leandro.rosa.prof@gmail.com`
-- **LinkedIn**: [Leandro Rosa]([https://www.linkedin.com/in/seu-perfil/](https://www.linkedin.com/in/leandro-rosa-da-silva-684809276/))
+- **LinkedIn**: [Leandro Rosa](https://www.linkedin.com/in/leandro-rosa-da-silva-684809276/)
