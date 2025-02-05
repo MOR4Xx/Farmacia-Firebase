@@ -355,7 +355,7 @@ public class Main {
     private static void editarFuncionario() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Digite o Nome2" +
+        System.out.print("Digite o CPF " +
                 " do Funcionario que deseja editar: ");
         String cpf = scanner.nextLine();
 
@@ -398,7 +398,7 @@ public class Main {
     private static void excluirFuncionario(){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Digite o Nome do Funcionario que deseja excluir: ");
+        System.out.print("Digite o CPF do Funcionario que deseja excluir: ");
         String cpf = scanner.nextLine();
 
         funcionarioDAO.exclurFuncionario(cpf);
