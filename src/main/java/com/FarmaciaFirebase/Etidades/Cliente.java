@@ -1,20 +1,19 @@
 package com.FarmaciaFirebase.Etidades;
 
-import javax.crypto.Cipher;
-
 public class Cliente extends Pessoa {
-    private boolean possuiPlanoSaude;
+    private boolean planoSaude;
 
     public Cliente(){
 
     }
 
-    public Cliente(String nome, String cpf, int idade, String telefone, boolean possuiPlanoSaude) {
+    public Cliente(String nome, String cpf, int idade, String telefone, boolean planoSaude) {
         super(nome, cpf, idade, telefone);
-        this.possuiPlanoSaude = possuiPlanoSaude;
+        this.planoSaude = planoSaude;
     }
 
     // Getters e Setters
-    public boolean isPossuiPlanoSaude() { return possuiPlanoSaude; }
-    public void setPossuiPlanoSaude(boolean possuiPlanoSaude) { this.possuiPlanoSaude = possuiPlanoSaude; }
+    public boolean isPlanoSaude() { return planoSaude; }
+    public void setPlanoSaude(boolean planoSaude) { this.planoSaude = planoSaude; }
+
 }

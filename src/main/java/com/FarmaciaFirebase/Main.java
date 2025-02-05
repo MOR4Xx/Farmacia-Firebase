@@ -1,26 +1,15 @@
 package com.FarmaciaFirebase;
 
 import com.FarmaciaFirebase.Conexao.FirebaseConfig;
-import com.FarmaciaFirebase.DAO.ClienteDAO;
-import com.FarmaciaFirebase.DAO.FuncionarioDAO;
-import com.FarmaciaFirebase.DAO.RemedioDAO;
-import com.FarmaciaFirebase.Etidades.Cliente;
-import com.FarmaciaFirebase.Etidades.Funcionario;
-import com.FarmaciaFirebase.Etidades.Remedio;
+import com.FarmaciaFirebase.DAO.*;
+import com.FarmaciaFirebase.Etidades.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.text.*;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Remedio> remedios = new ArrayList<>();
-    static ArrayList<Cliente> clientes = new ArrayList<>();
-    static ArrayList<Funcionario> funcionarios = new ArrayList<>();
     static RemedioDAO remedioDAO = new RemedioDAO();
     static ClienteDAO clienteDAO = new ClienteDAO();
     static FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
@@ -112,10 +101,9 @@ public class Main {
             int quantidadeEstoque = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.print("Precisa de receita (sim ou nao): ");
-            String receitaString = scanner.nextLine();
-
-            boolean receita = (receitaString == "sim") ? true : false;
+            System.out.print("Precisa de receita (S/M): ");
+            String receitaString =  scanner.nextLine().trim().toUpperCase();
+            boolean receita = (receitaString == "S") ? true : false;
 
             System.out.print("\nValidade (DD/MM/YYYY): ");
             String validadestr = scanner.nextLine();
@@ -220,7 +208,6 @@ public class Main {
     }
 
     private static void editarCliente() {
-        ClienteDAO clienteDAO = new ClienteDAO();
         Scanner scanner = new Scanner(System.in);
     
         System.out.print("Qual o CPF do cliente que deseja alterar? ");
@@ -230,10 +217,9 @@ public class Main {
             clienteDAO.editarCliente(cpf);
         } catch (ExecutionException | InterruptedException e) {
             System.out.println("Erro ao editar cliente: " + e.getMessage());
-            e.printStackTrace(); // Opcional: Mostra detalhes do erro
+            e.printStackTrace();
         }
     }
-    
 
     private static void adicionarCliente() {
         Scanner scanner = new Scanner(System.in);
@@ -248,20 +234,17 @@ public class Main {
     
             System.out.print("Idade: ");
             int idade = scanner.nextInt();
-            scanner.nextLine(); // Consumir quebra de linha
+            scanner.nextLine();
     
             System.out.print("Telefone: ");
             String telefone = scanner.nextLine();
     
             System.out.print("Possui plano de saúde? (S/N): ");
-            String respostaPlano = scanner.nextLine().trim().toUpperCase();
-            boolean possuiPlano = respostaPlano.equals("S");
-    
+            String plano = scanner.nextLine().trim().toUpperCase();
+            boolean possuiPlano = (plano == "S") ? true : false;
             
             Cliente cliente = new Cliente(nome, cpf, idade, telefone, possuiPlano);
             clienteDAO.adicionarcliente(cliente);
-    
-            System.out.println("Cliente adicionado com sucesso!");
     
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
@@ -297,7 +280,6 @@ public class Main {
     }
 
     private static void excluirCliente() {
-        ClienteDAO clienteDAO = new ClienteDAO();
         Scanner scanner = new Scanner(System.in);
     
         System.out.print("Digite o CPF do cliente que deseja excluir: ");
@@ -323,7 +305,7 @@ public class Main {
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar buffer
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1: adicionarFuncionario(); break;
@@ -371,6 +353,19 @@ public class Main {
     }
 
     private static void editarFuncionario() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o Nome2" +
+                " do Funcionario que deseja editar: ");
+        String cpf = scanner.nextLine();
+
+        try {
+            funcionarioDAO.editarFuncionario(cpf);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void listarFuncionario() {
@@ -401,6 +396,12 @@ public class Main {
     }
 
     private static void excluirFuncionario(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o Nome do Funcionario que deseja excluir: ");
+        String cpf = scanner.nextLine();
+
+        funcionarioDAO.exclurFuncionario(cpf);
 
     }
 }

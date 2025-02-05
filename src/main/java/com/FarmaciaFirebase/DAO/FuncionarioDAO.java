@@ -1,20 +1,17 @@
 package com.FarmaciaFirebase.DAO;
 
 import com.FarmaciaFirebase.Etidades.Funcionario;
-import com.FarmaciaFirebase.Etidades.Remedio;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class FuncionarioDAO {
     private static final String COLLECTION_NAME = "funcionarios";
 
+    // Adicionar funcionario
     public void adicionarFuncionario(Funcionario funcionario) throws ExecutionException, InterruptedException {
         Firestore db = FirestoreClient.getFirestore();
         DocumentReference docRef = db.collection(COLLECTION_NAME).document(funcionario.getCpf());
@@ -40,9 +37,10 @@ public class FuncionarioDAO {
         System.out.println("Funcionário adicionado com sucesso em: " + result.getUpdateTime());
     }
 
-    public void editarFuncionario(String nome) throws ExecutionException, InterruptedException {
+    // Editar funcionario
+    public void editarFuncionario(String cpf) throws ExecutionException, InterruptedException {
         Firestore db = FirestoreClient.getFirestore();
-        DocumentReference docRef = db.collection(COLLECTION_NAME).document(nome);
+        DocumentReference docRef = db.collection(COLLECTION_NAME).document(cpf);
         Scanner scanner = new Scanner(System.in);
 
         ApiFuture<DocumentSnapshot> future = docRef.get();
@@ -54,7 +52,7 @@ public class FuncionarioDAO {
         }
         Map<String, Object> funcionarioData = document.getData();
 
-        System.out.println("\n=== EDITAR Funcionario: " + nome + " ===");
+        System.out.println("\n=== EDITAR Funcionario: " + funcionarioData.get("nome") + " ===");
         System.out.println("1 - Nome: " + funcionarioData.get("nome"));
         System.out.println("2 - CPF: " + funcionarioData.get("cpf"));
         System.out.println("3 - Idade: " + funcionarioData.get("idade"));
@@ -109,6 +107,7 @@ public class FuncionarioDAO {
         System.out.println(" Funcionário atualizado com sucesso em: " + futureUpdate.get().getUpdateTime());
     }
 
+    // Editar funcionario
     public List<Funcionario> listarFuncionario() throws ExecutionException, InterruptedException {
         Firestore db = FirestoreClient.getFirestore();
         CollectionReference remediosRef = db.collection(COLLECTION_NAME);
@@ -123,21 +122,22 @@ public class FuncionarioDAO {
 
     }
 
-    public void exclurFuncionario(String nome) {
+    // Excluir Funcionario
+    public void exclurFuncionario(String cpf) {
         Firestore db = FirestoreClient.getFirestore();
-        DocumentReference docRef = db.collection(COLLECTION_NAME).document(nome);
+        DocumentReference docRef = db.collection(COLLECTION_NAME).document(cpf);
 
         try {
             ApiFuture<DocumentSnapshot> futureDoc = docRef.get();
             DocumentSnapshot document = futureDoc.get();
 
             if (!document.exists()) {
-                System.out.println("O funcionario '" + nome + "' não existe no banco de dados.");
+                System.out.println("O funcionario '" + cpf + "' não existe no banco de dados.");
                 return;
             }
 
             ApiFuture<WriteResult> futureDelete = docRef.delete();
-            System.out.println("Funcionario '" + nome + "' excluído com sucesso em: " + futureDelete.get().getUpdateTime());
+            System.out.println("Funcionario '" + cpf + "' excluído com sucesso em: " + futureDelete.get().getUpdateTime());
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

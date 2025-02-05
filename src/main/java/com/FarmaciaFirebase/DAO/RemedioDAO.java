@@ -89,8 +89,10 @@ public class RemedioDAO {
                 scanner.nextLine();
                 break;
             case 5:
-                System.out.print("Necessita Receita? (true/false): ");
-                novosDados.put("necessitaReceita", scanner.nextBoolean());
+                System.out.print("Necessita Receita? (S/N): ");
+                String receitaString = scanner.nextLine().trim().toUpperCase();
+                boolean receita = (receitaString == "S") ? true : false;
+                novosDados.put("necessitaReceita", receita);
                 scanner.nextLine();
                 break;
             case 6:
